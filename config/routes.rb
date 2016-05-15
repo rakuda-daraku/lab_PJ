@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :check_box_samples
   # rootパスの設定
   root to: 'home#index'
 

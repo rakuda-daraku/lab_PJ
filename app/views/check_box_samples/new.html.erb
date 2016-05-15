@@ -1,0 +1,9 @@
+<h1>CheckBoxSample#new</h1>
+<%= form_for(@checkbox) do  |f|%>
+    <label><%= f.radio_button :status, "1" %>done</label>
+    <label><%= f.radio_button :status, "2" %>doing</label>
+    <%= f.submit '登録' %>
+
+
+<% end %>
+

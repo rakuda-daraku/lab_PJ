@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # ログイン前の場合、ログイン画面にリダイレクト
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
