@@ -1,4 +1,12 @@
 class User < ActiveRecord::Base
+
+  # フォロー・フォロワーの紐付
+  has_many :follows_f, class_name: 'Relation', foreign_key: :from_id
+  has_many :followings, through: :follows_f, source: 'target'
+
+  has_many :followers_f, class_name: 'Relation', foreign_key: :target_id
+  has_many :followers, through: :followers_f, source: 'from'
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -10,4 +18,31 @@ class User < ActiveRecord::Base
   validates :username,
             uniqueness: { case_sensitive: :false },
             length: { minimum: 4, maximum: 20 }
+
+  # フォロー等の機能
+
+  # フォロー
+  def follow user
+    followings << user
+  end
+
+  # フォロー解除
+  def unfollow user
+    followings.destroy user
+  end
+
+  # フォローしてるユーザかの判定
+  def followed? user
+    followings.include? user
+  end
+
+  # フォローされているか？
+  def follower? user
+    user.followers.include? user
+  end
+
+  # フォロー一覧
+  def follows_list
+    followings.find_by(1)
+  end
 end
