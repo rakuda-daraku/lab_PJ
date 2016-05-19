@@ -7,6 +7,11 @@ class User < ActiveRecord::Base
   has_many :followers_f, class_name: 'Relation', foreign_key: :target_id
   has_many :followers, through: :followers_f, source: 'from'
 
+  # タグ紐付
+  has_many :to_tags_f, class_name: 'RelationTag', foreign_key: :relation_code
+  has_many :tagging, through: :to_tags_f, source: 'to_tag'
+
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -41,8 +46,4 @@ class User < ActiveRecord::Base
     user.followers.include? user
   end
 
-  # フォロー一覧
-  def follows_list
-    followings.find_by(1)
-  end
 end
