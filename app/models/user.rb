@@ -20,9 +20,9 @@ class User < ActiveRecord::Base
   # ログインパラメータのアクセサ
   attr_accessor :login
 
-  validates :username,
-            uniqueness: { case_sensitive: :false },
-            length: { minimum: 4, maximum: 20 }
+  # validates :username,
+  #           uniqueness: { case_sensitive: :false },
+  #           length: { minimum: 4, maximum: 20 }
 
   # フォロー等の機能
 

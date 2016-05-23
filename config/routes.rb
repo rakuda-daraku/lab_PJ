@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
 
   resources :check_box_samples
+  devise_for :users
+
+  post 'upload' => 'home#upload'
+
+
   # rootパスの設定
   root to: 'home#index'
 
-  devise_for :users
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
