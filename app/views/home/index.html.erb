@@ -5,6 +5,12 @@
   <div class="field">
     <%= f.label :image %><br>
     <%= f.file_field :image %>
+    <%= f.text_field :val %>
+    <%= f.text_field :vec %>
     <%= f.submit '投稿' %>
   </div>
+<% end %>
+
+<% if @book.image? %>
+  <%= image_tag @book.image.thumb.url %>
 <% end %>

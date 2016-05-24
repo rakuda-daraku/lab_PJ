@@ -16,7 +16,18 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  process resize_to_limit: [100, 100]
+  process resize_to_limit: [200, 200]
+
+  version :thumb do
+    process :dynamic_resize_to_limit
+  end
+
+  private
+  def dynamic_resize_to_limit
+    size = [model.class::tate, model.class::yoko]
+    resize_to_limit size[0], size[1]
+  end
+
 
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

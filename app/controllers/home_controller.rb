@@ -5,6 +5,8 @@ class HomeController < ApplicationController
 
   def upload
     @book = Book.new
+    @book.tate(book_params[:val])
+    @book.yoko(book_params[:vec])
     Book.create(book_params)
     render :template => 'home/index'
   end
@@ -12,6 +14,6 @@ class HomeController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:image)
+    params.require(:book).permit(:image, :val, :vec)
   end
 end
